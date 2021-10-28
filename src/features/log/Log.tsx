@@ -5,8 +5,12 @@ export function Log() {
         time: "2018-01-01 09:00:00",
         stocks: [
             {
-                stockName: 'LOL',
+                stockName: 'APPLE',
                 stockPrice: '$123.00'
+            },
+            {
+                stockName: 'GOOGLE',
+                stockPrice: '$85.00'
             }
         ]
     },
@@ -14,19 +18,24 @@ export function Log() {
         time: "2018-01-01 09:00:02",
         stocks: [
             {
-                stockName: 'ROFL',
-                stockPrice: '$23.00'
+                stockName: 'ORACLE',
+                stockPrice: '$123.00'
+            },
+            {
+                stockName: 'AMAZON',
+                stockPrice: '$85.00'
             }
         ]
     }];
 
     return (
         <>
-        {
-            logItems.map((eachLogItem: LogItemData) => (
-                <LogItem time={eachLogItem.time} stocks={eachLogItem.stocks} />
-            ))
-        }
+            <h2>Log</h2>
+            {
+                logItems.map((eachLogItem: LogItemData) => (
+                    <LogItem time={eachLogItem.time} stocks={eachLogItem.stocks} />
+                ))
+            }
         </>
     );
 }

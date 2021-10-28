@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export type StockData = {
     stockName: string;
@@ -11,15 +13,20 @@ export type LogItemData = {
 export function LogItem(logItem: LogItemData) {
     return (
         <>
-            <div>Updates for {logItem.time}</div>
-            {logItem.stocks.map((eachStock: StockData) => {
-                return (
-                    <>
-                        <div>{eachStock.stockName}</div>
-                        <div>{eachStock.stockPrice}</div>
-                    </>
-                );    
-            })}
+            <Card style={{ width: '18rem' }}>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>
+                        <span style={{fontWeight: 600}}>Updates for {logItem.time}</span>
+                    </ListGroup.Item>
+                    {logItem.stocks.map((eachStock: StockData) => {
+                        return (
+                            <ListGroup.Item>
+                                {eachStock.stockName}: {eachStock.stockPrice}
+                            </ListGroup.Item>
+                        );    
+                    })}
+                </ListGroup>
+            </Card>
         </>
     );
 }
