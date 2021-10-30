@@ -6,6 +6,14 @@ export interface DateWiseStocks {
     date: string;
     stocks: StockType[];
 }
+export interface StockSummary {
+    stockCode: string;
+    startingPrice: number;
+    lowestPrice: number;
+    highestPrice: number;
+    currentPrice: number;
+}
 export interface LogState {
-    logs: DateWiseStocks[];
+    stockLogs: DateWiseStocks[];
+    stockSummaries: StockSummary[];
 }

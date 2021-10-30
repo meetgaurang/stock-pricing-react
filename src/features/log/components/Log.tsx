@@ -71,7 +71,7 @@ export function Log(props: any) {
 
 const mapStateToProps = (state: AppStoreState) => {
     return {
-        logs: state.logs
+        logs: state.logs.stockLogs
     };
 };
 

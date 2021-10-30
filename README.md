@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+## ToDo
+This is just a demo app. Following improvments can be made in this app,
+- UI is responsive and workable but can be made better
+- Improving type safety (>95% objects are already type safe)
+- Making UI more accessible
+- Using Redux Toolkit rather than plain React Redux
+- Removing unwanted dependencies
+- Adding Unit test cases using Jest and Enzyme
+- Adding E2E test cases using Cypress
+
+## Application Screenshot
+![App Screenshot](screenshots/app-screenshot.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -7,7 +20,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:9898](http://localhost:9898) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.

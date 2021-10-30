@@ -6,7 +6,7 @@ import { DateWiseStocks, StockType } from '../store/types';
 export function LogItem(logItem: DateWiseStocks) {
     return (
         <>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem', marginBottom: '1rem' }}>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
                         <span style={{fontWeight: 600}}>Updates for {logItem.date}</span>
