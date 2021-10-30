@@ -1,14 +1,14 @@
 import { AddStocksAction, AddStocksActionType } from "./actions";
-import { DateWiseStocks, LogState } from "./types";
+import { DateWiseStocks } from "./types";
 
 export const logsInitialState: DateWiseStocks[] = [];
 
 export const logsReducer = (state = logsInitialState, action: AddStocksAction) => {
     switch (action.type) {
         case AddStocksActionType: {
-            return state.concat(action.payload);
+            return [action.payload].concat(state);
         }
-        default: // need this for default case
+        default:
             return state;
     }
 }

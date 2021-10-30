@@ -1,24 +1,17 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { DateWiseStocks, StockType } from '../store/types';
 
-export type StockDataType = {
-    code: string;
-    price: string;
-}
-export type LogItemDataType = {
-    time: string;
-    stocks: StockDataType[]
-}
-export function LogItem(logItem: LogItemDataType) {
+export function LogItem(logItem: DateWiseStocks) {
     return (
         <>
             <Card style={{ width: '18rem' }}>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <span style={{fontWeight: 600}}>Updates for {logItem.time}</span>
+                        <span style={{fontWeight: 600}}>Updates for {logItem.date}</span>
                     </ListGroup.Item>
-                    {logItem.stocks && logItem.stocks.map((eachStock: StockDataType) => {
+                    {logItem.stocks && logItem.stocks.map((eachStock: StockType) => {
                         return (
                             <ListGroup.Item key={eachStock.code}>
                                 {eachStock.code}: {eachStock.price}

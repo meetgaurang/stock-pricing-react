@@ -5,17 +5,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import { LogItem, StockDataType } from "./LogItem";
-import { AppStoreState } from "../../store";
-import { addStocksActionCreator } from "./store/actions";
-import { DateWiseStocks } from "./store/types";
+import { LogItem } from "./LogItem";
+import { AppStoreState } from "../../../store";
+import { addStocksActionCreator } from "../store/actions";
+import { DateWiseStocks, StockType } from "../store/types";
 
-export type LogAPIResponseType = StockDataType[];
+export type LogAPIResponseType = StockType[];
 
 export function Log(props: any) {
-    const [logItem, setLogItem] = useState<LogAPIResponseType>([]);
     const [pause, setPause] = useState<boolean>(false);
-    const [isAPIError, setIsAPIError] = useState<boolean>(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -23,14 +21,13 @@ export function Log(props: any) {
                 fetch("https://join.reckon.com/stock-pricing")
                     .then(response => response.json())
                     .then((response: LogAPIResponseType) => {
-                        setLogItem(response);
                         props.addLogs({
                             date: getCurrentTime(),
                             stocks: response
                         });
                     })
                     .catch(error => {
-                        setIsAPIError(true);
+                        // Handle API error
                     });
             }
         }, 2000);
@@ -38,7 +35,7 @@ export function Log(props: any) {
         return () => {
             clearInterval(interval);
         };
-    }, [setLogItem, pause]);
+    }, [pause]);
 
     const getCurrentTime = useCallback(() => {
         let today = new Date();
@@ -62,10 +59,9 @@ export function Log(props: any) {
             <Row>
                 <Col>
                     {
-                        // logItem.map((eachLogItem: LogItemDataType) => (
-                        //     <LogItem time={eachLogItem.time} stocks={eachLogItem.stocks} />
-                        // ))
-                        <LogItem time={getCurrentTime()} stocks={logItem} />
+                        props.logs.map((eachLogItem: DateWiseStocks) => (
+                            <LogItem date={eachLogItem.date} stocks={eachLogItem.stocks} />
+                        ))
                     }
                 </Col>
             </Row>
@@ -81,7 +77,7 @@ const mapStateToProps = (state: AppStoreState) => {
 
 const mapDispatchProps = (dispatch: any) => {
     return {
-        addLogs: (logs: DateWiseStocks[]) => dispatch(addStocksActionCreator(logs))
+        addLogs: (logs: DateWiseStocks) => dispatch(addStocksActionCreator(logs))
     };
 }
 
