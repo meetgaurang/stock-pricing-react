@@ -2,15 +2,15 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export type StockData = {
-    stockName: string;
-    stockPrice: string;
+export type StockDataType = {
+    code: string;
+    price: string;
 }
-export type LogItemData = {
+export type LogItemDataType = {
     time: string;
-    stocks: StockData[]
+    stocks: StockDataType[]
 }
-export function LogItem(logItem: LogItemData) {
+export function LogItem(logItem: LogItemDataType) {
     return (
         <>
             <Card style={{ width: '18rem' }}>
@@ -18,10 +18,10 @@ export function LogItem(logItem: LogItemData) {
                     <ListGroup.Item>
                         <span style={{fontWeight: 600}}>Updates for {logItem.time}</span>
                     </ListGroup.Item>
-                    {logItem.stocks.map((eachStock: StockData) => {
+                    {logItem.stocks && logItem.stocks.map((eachStock: StockDataType) => {
                         return (
-                            <ListGroup.Item>
-                                {eachStock.stockName}: {eachStock.stockPrice}
+                            <ListGroup.Item key={eachStock.code}>
+                                {eachStock.code}: {eachStock.price}
                             </ListGroup.Item>
                         );    
                     })}
