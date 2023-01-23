@@ -14,6 +14,14 @@ export type LogAPIResponseType = StockType[];
 
 export function Log(props: any) {
     const [pause, setPause] = useState<boolean>(false);
+    const { logs, addLogs } = props;
+    
+    const getCurrentTime = useCallback(() => {
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        return date+' '+time;
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,7 +29,7 @@ export function Log(props: any) {
                 fetch("https://join.reckon.com/stock-pricing")
                     .then(response => response.json())
                     .then((response: LogAPIResponseType) => {
-                        props.addLogs({
+                        addLogs({
                             date: getCurrentTime(),
                             stocks: response
                         });
@@ -35,14 +43,7 @@ export function Log(props: any) {
         return () => {
             clearInterval(interval);
         };
-    }, [pause]);
-
-    const getCurrentTime = useCallback(() => {
-        let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        return date+' '+time;
-    }, []);
+    }, [pause, getCurrentTime, addLogs]);
 
     return (
         <Container>
@@ -59,7 +60,7 @@ export function Log(props: any) {
             <Row>
                 <Col>
                     {
-                        props.logs.map((eachLogItem: DateWiseStocks) => (
+                        logs.map((eachLogItem: DateWiseStocks) => (
                             <LogItem date={eachLogItem.date} stocks={eachLogItem.stocks} />
                         ))
                     }
